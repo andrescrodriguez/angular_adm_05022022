@@ -1,0 +1,21 @@
+
+    <button type="button" id="btnSeleccionarCambiar" mat-raised-button (click)="fileInput.click()">
+        {{btnSeleccionarCambiarText}}
+    </button>
+    <input type="file" #fileInput hidden (change)="change($event)" />
+
+<ng-container *ngIf="file != null">
+    <button type="button" mat-raised-button (click)="upload()">
+        Subir
+    </button>
+</ng-container>
+
+
+
+
+
+<div>
+    <div *ngIf="imagenBase64">
+        <img [src]="imagenBase64" />
+    </div>
+</div>

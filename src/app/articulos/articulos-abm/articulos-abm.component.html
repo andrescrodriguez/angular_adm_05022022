@@ -1,0 +1,61 @@
+<!-- <p>Binding de doble via: {{contenidoMarkDown}}</p> -->
+
+<form [formGroup]="formGroup" (submit)="accion()">
+        
+    <mat-form-field appearance="fill" style="width: 100%; margin: 10px 0px;">
+        <mat-label>Nombre de ruta</mat-label>
+        <input matInput formControlName="NombreDeRuta">
+        <mat-error>{{obtenerErrorCampoNombreDeRuta()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%; margin: 10px 0px;">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="Titulo"> <!-- [(ngModel)]="contenidoMarkDown"-->
+        <mat-error>{{obtenerErrorCampoTitulo()}}</mat-error>
+    </mat-form-field>
+
+    <app-select 
+        [nombre]="'Categoría'" 
+        [objetos]="categorias"
+        (valueSelectedEvent)="categoriaSelected($event)"
+        ></app-select>
+    <!-- <mat-form-field appearance="fill">
+        <mat-label>Categoría</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.value">
+            {{categoria.viewValue}}
+            </mat-option>
+        </mat-select>
+        <mat-error>{{obtenerErrorCampoCategoria()}}</mat-error>
+    </mat-form-field> -->
+      
+    <quill-editor formControlName="Contenido"></quill-editor>
+
+    <mat-label>Prelectura</mat-label>
+    <quill-editor formControlName="PreLectura"></quill-editor>
+
+    <mat-form-field appearance="fill" style="margin: 10px 0px;">
+        <mat-label>Fecha de Publicación</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="FechaHoraPublicacion" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div style="margin: 10px 0px;">
+        <app-input-img (imagenSeleccionada)="imagenSeleccionada($event)"></app-input-img>
+      </div>
+
+      <!-- <app-selector-multiple 
+        [noSeleccionados]="categoriasNoSeleccionadas"
+        [seleccionados]="categoriasSeleccionadas"
+      >
+      </app-selector-multiple> -->
+    
+      <!-- <h4>Autocomplete</h4>
+      <app-autocomplete></app-autocomplete> -->
+
+      <div style="margin: 10px 0px;">
+        <button mat-stroked-button routerLink="/articulos">Cancelar</button>
+        <button mat-flat-button color="primary">{{btn}}</button>
+    </div>
+  </form>

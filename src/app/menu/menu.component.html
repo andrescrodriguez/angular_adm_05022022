@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+    <span>LOGO</span>
+    <span>
+        <button mat-icon-button routerLink="/">
+            Inicio
+        </button>
+
+        <button mat-icon-button [matMenuTriggerFor]="blog" aria-label="">
+            Blog
+        </button>
+        <mat-menu #blog="matMenu">
+            <a mat-menu-item routerLink="/categorias">
+                Categorías
+            </a>
+            <button mat-menu-item routerLink="/articulos">
+                Artículos
+            </button>
+            <button mat-menu-item routerLink="/galeria">
+                Galería
+            </button>
+        </mat-menu>
+        
+        <button mat-icon-button [matMenuTriggerFor]="cuenta" aria-label="">
+            <span class="material-icons">
+                account_circle
+                </span> 
+        </button>
+        <mat-menu #cuenta="matMenu">
+            <span mat-menu-item>
+                {{email}}
+            </span>
+            <button mat-menu-item (click)="cerrarSesion()">
+                Cerrar Sesión
+            </button>
+        </mat-menu>
+    </span>
+ </mat-toolbar>
+
+
+

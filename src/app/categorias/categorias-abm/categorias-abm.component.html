@@ -1,0 +1,22 @@
+<form
+[formGroup]="formGroup"
+(submit)="accion()"
+>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="Nombre">
+        <mat-error>{{obtenerErrorCampoNombre()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre de Ruta</mat-label>
+        <input matInput formControlName="NombreDeRuta">
+    </mat-form-field>
+
+    <div>
+        <button mat-stroked-button routerLink="/categorias">Cancelar</button>
+        <button mat-flat-button color="primary" [disabled]="formGroup.invalid">{{btn}}</button>
+    </div>
+
+</form>
