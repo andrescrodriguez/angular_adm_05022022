@@ -1,21 +1,26 @@
 
-    <button type="button" id="btnSeleccionarCambiar" mat-raised-button (click)="fileInput.click()">
+<div div fxLayout="row" fxLayoutAlign="center center" style="margin-top:1em; margin-bottom: 1em;">
+
+    <button type="button" id="btnSeleccionarCambiar" mat-raised-button color="primary" (click)="fileInput.click()">
         {{btnSeleccionarCambiarText}}
     </button>
     <input type="file" #fileInput hidden (change)="change($event)" />
 
-<ng-container *ngIf="file != null">
-    <button type="button" mat-raised-button (click)="upload()">
-        Subir
-    </button>
-</ng-container>
+    <div class="separador-horizontal-5px" style="separador-horizontal-10px"></div>
 
+    <ng-container *ngIf="file != null">
+        <button type="button" mat-raised-button color="warn" (click)="upload()">
+            Subir
+        </button>
+    </ng-container>
 
-
-
-
-<div>
-    <div *ngIf="imagenBase64">
-        <img [src]="imagenBase64" />
-    </div>
 </div>
+
+
+<div *ngIf="imagenBase64" fxLayout="row" fxLayoutAlign="center center">
+    <img [src]="imagenBase64" style="width: 50%;" />
+</div>
+
+
+
+

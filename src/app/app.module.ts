@@ -26,6 +26,8 @@ import { SeguridadInterceptorService } from './seguridad/seguridad-interceptor.s
 import { SelectComponent } from './controles-genericos/select/select.component';
 import { QuillModule } from 'ngx-quill';
 import { GaleriaComponent } from './galeria/galeria.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,8 @@ import { GaleriaComponent } from './galeria/galeria.component';
     FormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
-    QuillModule
+    QuillModule,
+    FlexLayoutModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
