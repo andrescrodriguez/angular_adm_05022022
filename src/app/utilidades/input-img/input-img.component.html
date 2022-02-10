@@ -6,7 +6,7 @@
     </button>
     <input type="file" #fileInput hidden (change)="change($event)" />
 
-    <div class="separador-horizontal-5px" style="separador-horizontal-10px"></div>
+    <div class="separador-horizontal-10"></div>
 
     <ng-container *ngIf="file != null">
         <button type="button" mat-raised-button color="warn" (click)="upload()">
@@ -18,9 +18,5 @@
 
 
 <div *ngIf="imagenBase64" fxLayout="row" fxLayoutAlign="center center">
-    <img [src]="imagenBase64" style="width: 50%;" />
+    <img [src]="imagenBase64" class="width-50" />
 </div>
-
-
-
-

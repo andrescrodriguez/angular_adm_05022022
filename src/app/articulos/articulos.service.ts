@@ -32,9 +32,6 @@ export class ArticulosService implements ABM {
   }
 
   guardar(articulo: any) {
-    console.log("articulo");
-    console.log(articulo);
-    debugger;
     return this.http.post(this.apiURL, articulo);
   }
 

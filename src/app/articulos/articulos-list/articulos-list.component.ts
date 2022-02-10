@@ -16,7 +16,7 @@ export class ArticulosListComponent implements OnInit {
 
   articulos: Articulo[];
 
-  columnasAMostrar = ['Titulo', 'FechaHoraPublicacion', 'Acciones'];
+  columnasAMostrar = ['Titulo', 'CategoriaNombre', 'FechaHoraPublicacion', 'Acciones'];
   @ViewChild(MatTable) table: MatTable<any>;
   
   cantidadTotalDeRegistros;
