@@ -4,72 +4,120 @@
   Es para que pueda ocultar o mostrar botones, menues, dentro del o los formularios, pero no para proteger la ruta
   Para proteger la ruta se usa el route guards
 -->
-<app-autorizado [rol]="'admin'">
+<!-- <app-autorizado [rol]="'admin'">
     <ng-container noAutorizado>
       no autorizado
     </ng-container>
     <ng-container autorizado>
       autorizado
     </ng-container>
-  </app-autorizado>
-  
-  <h1>Artículos</h1>
-  
-<div fxLayout="row" fxLayoutAlign="flex-end" style="margin-bottom:15px;">
-  <a routerLink="/articulo" mat-flat-button color="primary">Nuevo</a>
-</div>
+  </app-autorizado> -->
+  <mat-card style="margin-top:1em; margin-bottom:1em;">
+      <form>
+        <mat-card-content fxLayout="row" fxLayoutAlign="space-between center"  style="margin:0;">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Título</mat-label>
+            <input matInput placeholder="" value="">
+          </mat-form-field>
 
-  <table mat-table [dataSource]="articulos" class="mat-elevation-z8 width-100">
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="Titulo">
-        <th mat-header-cell *matHeaderCellDef> Título </th>
-        <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-      </ng-container>
+          <!--para esto puedo usar el desplegable que cree-->
+          <mat-form-field appearance="fill">
+            <mat-label>Categoría</mat-label>
+              <mat-select>
+                <mat-option> <!--*ngFor="let food of foods" [value]="food.value"-->
+                  <!-- {{food.viewValue}} -->
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-      <ng-container matColumnDef="CategoriaNombre">
-        <th mat-header-cell *matHeaderCellDef> Categoría </th>
-        <td mat-cell *matCellDef="let element"> {{element.categoriaNombre}} </td>
-      </ng-container>
+          <mat-form-field appearance="fill">
+            <mat-label>FH Desde</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>FH Hasta</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="flex-end">
+          <a routerLink="/articulo" mat-flat-button>Buscar</a>
+        </div>
+      </form>
+  </mat-card>
+
+  <mat-card style="margin-top:1em; margin-bottom:2em;">
+    <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+      Artículos
+      <div fxLayout="row" fxLayoutAlign="flex-end">
+        <a routerLink="/articulo" mat-flat-button color="primary">Nuevo</a>
+      </div>
+    </mat-card-title>
     
-      <ng-container matColumnDef="FechaHoraPublicacion">
-        <th mat-header-cell *matHeaderCellDef> FH Publicación </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaHoraPublicacion}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="NombreDeRuta">
-        <th mat-header-cell *matHeaderCellDef> Nombre de Ruta </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombreDeRuta}} </td>
-      </ng-container>
+    <mat-card-content>
+      <table mat-table [dataSource]="articulos" class="width-100">
   
-      <!-- Weight Column -->
-      <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef class="center"> Acciones </th>
-          <td mat-cell *matCellDef="let element" class="center"> 
-              <a routerLink="../articulo/{{element.id}}" mat-flat-button color="primary">Editar</a>  
-              <button type="button" 
-              mat-flat-button 
-              color="warn"
-              [swal]="{
-                title: 'Confirmación',
-                text: '¿Está seguro que desea borrar el registro?',
-                showCancelButton: true
-              }"
-              (confirm)="eliminar(element)" 
-              >Borrar</button> 
-          </td>
+        <!-- Name Column -->
+        <ng-container matColumnDef="Titulo">
+          <th mat-header-cell *matHeaderCellDef> Título </th>
+          <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="CategoriaNombre">
+          <th mat-header-cell *matHeaderCellDef> Categoría </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoriaNombre}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="FechaHoraPublicacion">
+          <th mat-header-cell *matHeaderCellDef> FH Publicación </th>
+          <td mat-cell *matCellDef="let element"> {{element.fechaHoraPublicacion}} </td>
+        </ng-container>
+  
+        <!-- Weight Column -->
+        <ng-container matColumnDef="NombreDeRuta">
+          <th mat-header-cell *matHeaderCellDef> Nombre de Ruta </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombreDeRuta}} </td>
         </ng-container>
     
-      <tr mat-header-row *matHeaderRowDef="columnasAMostrar"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnasAMostrar;"></tr>
-    </table>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef class="center"> Acciones </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;"> 
+                <a routerLink="../articulo/{{element.id}}" mat-flat-button color="primary">Editar</a>  
+                <button type="button" 
+                mat-flat-button 
+                color="warn"
+                [swal]="{
+                  title: 'Confirmación',
+                  text: '¿Está seguro que desea borrar el registro?',
+                  showCancelButton: true
+                }"
+                (confirm)="eliminar(element)" 
+                >Borrar</button> 
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="columnasAMostrar"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasAMostrar;"></tr>
+      </table>
+    
+      <mat-paginator 
+        showFirstLastButton
+        [length]="cantidadTotalDeRegistros"
+                    [pageSize]="cantidadDeRegistrosAMostrar"
+                    [pageSizeOptions]="[5, 10, 20, 50]"
+                    aria-label="Select page"
+          (page)="actualizarPaginacion($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
   
-    <mat-paginator 
-    showFirstLastButton
-    [length]="cantidadTotalDeRegistros"
-                [pageSize]="cantidadDeRegistrosAMostrar"
-                [pageSizeOptions]="[5, 10, 20, 50]"
-                aria-label="Select page"
-      (page)="actualizarPaginacion($event)">
-  </mat-paginator>
+ 
+  
+
+
+  

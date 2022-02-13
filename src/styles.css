@@ -4,7 +4,11 @@
 @import '~quill/dist/quill.snow.css';
 
 /* html, body { height: 100%; } */
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #cdcdcd;
+}
 
 .contenedor{
     padding-left:15px;
@@ -22,4 +26,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .separador-horizontal-10{
     margin-left:5px;
     margin-right:5px;
+}
+
+.upper{
+    text-transform: uppercase;
+}
+
+.subtitle{
+    margin:0;
+    padding:0;
 }
