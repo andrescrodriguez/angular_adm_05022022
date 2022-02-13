@@ -14,14 +14,24 @@
   </app-autorizado> -->
   <mat-card style="margin-top:1em; margin-bottom:1em;">
       <form>
-        <mat-card-content fxLayout="row" fxLayoutAlign="space-between center"  style="margin:0;">
-          <mat-form-field class="example-full-width" appearance="fill">
+        <mat-card-content 
+        fxLayout.xs="column" 
+        fxLayout.sm="column" 
+        fxLayout.md="row" 
+        fxLayout.lg="row"
+        fxLayout.xl="row" 
+        fxLayoutAlign="space-between stretch"  
+        fxLayoutAlign.md="space-between"
+        fxLayoutWrap
+        style="margin:0;">
+
+          <mat-form-field class="example-full-width" appearance="fill" fxFlex.md="24%">
             <mat-label>Título</mat-label>
             <input matInput placeholder="" value="">
           </mat-form-field>
 
           <!--para esto puedo usar el desplegable que cree-->
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" fxFlex.md="24%">
             <mat-label>Categoría</mat-label>
               <mat-select>
                 <mat-option> <!--*ngFor="let food of foods" [value]="food.value"-->
@@ -30,14 +40,14 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" fxFlex.md="24%">
             <mat-label>FH Desde</mat-label>
             <input matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" fxFlex.md="24%">
             <mat-label>FH Hasta</mat-label>
             <input matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
