@@ -13,6 +13,7 @@ export class SelectComponent implements OnInit {
   @Input()
   objetos: any[];
 
+  @Input()
   valueSelected: string;
 
   @Output()

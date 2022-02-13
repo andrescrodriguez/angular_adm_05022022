@@ -1,6 +1,6 @@
 <!-- <p>Binding de doble via: {{contenidoMarkDown}}</p> -->
 <mat-card style="margin-top:1em; margin-bottom:1em;">
-  <mat-card-content fxLayout="row" fxLayoutAlign="space-between center" style="margin:0;">
+  <mat-card-content style="margin:0;">
   
     <form [formGroup]="formGroup" (submit)="accion()" fxLayout="column">
           
@@ -31,6 +31,7 @@
           fxFlex.xs="49%"
           fxFlex.sm="49%"
           fxFlex.md="49%"
+          [valueSelected]="idCategoriaSelected"
           (valueSelectedEvent)="categoriaSelected($event)"
           ></app-select>
 

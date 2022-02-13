@@ -20,6 +20,7 @@ export class ArticulosAbmComponent implements OnInit {
 
   btn: string;
   categorias: KeyValue[] = []; 
+  idCategoriaSelected: string;
 
   constructor(private formBuilder: FormBuilder, 
     private location: Location,
@@ -101,7 +102,7 @@ export class ArticulosAbmComponent implements OnInit {
       this.setearNombreDeRuta();
       this.articulosService.obtenerPorId(parseInt(form[1])).subscribe({
         next: (n) => {
-          console.log(n) 
+          
           this.formGroup.patchValue({
             Titulo:  n.titulo,
             PreLectura: n.preLectura,
@@ -109,8 +110,12 @@ export class ArticulosAbmComponent implements OnInit {
             NombreDeRuta: n.nombreDeRuta,
             FechaHoraPublicacion: n.fechaHoraPublicacion,
             Foto: '',
-            IdCategoria: n.idCategoria
+            IdCategoria: n.idCategoria.toString()
           })
+
+          // desplegable de categorías
+          this.idCategoriaSelected = n.idCategoria.toString();
+
           },
         error: (e) => { 
           this.errores = parsearErroresAPI(e);
@@ -191,6 +196,9 @@ export class ArticulosAbmComponent implements OnInit {
   }
 
   public editar(id: number){
+
+    console.log(this.formGroup.value);
+
     this.articulosService.editar(id, this.formGroup.value).subscribe({
       next: (n) => { 
         Swal.fire(
