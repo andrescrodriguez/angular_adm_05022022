@@ -109,7 +109,7 @@ export class ArticulosAbmComponent implements OnInit {
             Contenido: n.contenido,
             NombreDeRuta: n.nombreDeRuta,
             FechaHoraPublicacion: n.fechaHoraPublicacion,
-            Foto: '',
+            idImagen: '',
             IdCategoria: n.idCategoria.toString()
           })
 
@@ -271,12 +271,7 @@ export class ArticulosAbmComponent implements OnInit {
     return '';
   }
 
-
-
-  cambia(event){
-    console.log(event);
-  }
-
+  
   // guardar(): void {
   //   if (this.encontrarControlesInvalidos()){
   //     return;
@@ -306,9 +301,10 @@ export class ArticulosAbmComponent implements OnInit {
 
  
 
-  imagenSeleccionada(file){
-    this.formGroup.get('Foto').setValue(file);
+  imagenSeleccionada(imagen){
+    this.formGroup.get('idImagen').setValue(imagen.id.toString());
   }
+
 
   // escribirParametroEnUrl(){
   //   var queryStrings = [];

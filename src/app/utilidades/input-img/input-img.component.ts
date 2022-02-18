@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { toBase64 } from 'src/app/funciones';
+import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
+import { Imagen } from 'src/app/models/imagen';
 
 
 @Component({
@@ -10,9 +12,9 @@ import { toBase64 } from 'src/app/funciones';
 export class InputImgComponent implements OnInit {
 
   @Output()
-  imagenSeleccionada: EventEmitter<File> = new EventEmitter<File>();
+  imagenSeleccionada: EventEmitter<Imagen> = new EventEmitter<Imagen>();
 
-  constructor() { }
+  constructor(private fileServerImagenService: FileServerImagenService) { }
 
   ngOnInit(): void {
     this.btnSeleccionarCambiarTextoMethod();
@@ -45,9 +47,17 @@ export class InputImgComponent implements OnInit {
   }
 
   upload(){
-    this.imagenSeleccionada.emit(this.file);
-    this.file = null;
-    this.imagenBase64 = '';
-    this.btnSeleccionarCambiarTextoMethod();
+    this.fileServerImagenService.upload(this.file).subscribe(event => {
+      // if (event.type === HttpEventType.UploadProgress){
+      //   // this.progress = Math.round(100 * event.loaded / event.total);
+      // }
+      // else if (event.type === HttpEventType.Response) {
+      //   // this.message = 'Upload success.';
+      // }
+      console.log(event);
+      this.imagenSeleccionada.emit(event);
+      this.file = null;
+      this.btnSeleccionarCambiarTextoMethod();
+    });
   }
 }
