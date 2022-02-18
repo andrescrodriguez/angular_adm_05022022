@@ -58,7 +58,7 @@ export class ArticulosAbmComponent implements OnInit {
       Contenido: ['', Validators.required],
       NombreDeRuta: ['', Validators.required],
       FechaHoraPublicacion: ['', Validators.required],
-      Foto: '',
+      IdImagen: 0,
       IdCategoria: ['', Validators.required]
     });
 
@@ -109,7 +109,7 @@ export class ArticulosAbmComponent implements OnInit {
             Contenido: n.contenido,
             NombreDeRuta: n.nombreDeRuta,
             FechaHoraPublicacion: n.fechaHoraPublicacion,
-            idImagen: '',
+            IdImagen: n.idImagen,
             IdCategoria: n.idCategoria.toString()
           })
 
@@ -197,8 +197,6 @@ export class ArticulosAbmComponent implements OnInit {
 
   public editar(id: number){
 
-    console.log(this.formGroup.value);
-
     this.articulosService.editar(id, this.formGroup.value).subscribe({
       next: (n) => { 
         Swal.fire(
@@ -271,38 +269,8 @@ export class ArticulosAbmComponent implements OnInit {
     return '';
   }
 
-  
-  // guardar(): void {
-  //   if (this.encontrarControlesInvalidos()){
-  //     return;
-  //   }
-
-  //   //generar un arreglo con los items seleccionados de la lista de selector multiple
-  //   const idsArr = this.categoriasSeleccionadas.map(x => x.llave);
-  //   console.log(idsArr);
-
-  //   // con esta propiedad accedo a todos los valores del formulario
-  //   console.log(this.formGroup.value);
-  // }
-
-  // private leerValoresURL(){
-  //   this.activatedRoute.queryParams.subscribe(params => {
-
-  //     var objeto: any = {};
-
-  //     if(params.titulo){
-  //       objeto.Titulo = params.titulo;
-  //     }
-
-  //     this.formGroup.patchValue(objeto);
-
-  //   });
-  // }
-
- 
-
   imagenSeleccionada(imagen){
-    this.formGroup.get('idImagen').setValue(imagen.id.toString());
+    this.formGroup.get('IdImagen').setValue(imagen.id);
   }
 
 

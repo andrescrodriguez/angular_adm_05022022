@@ -25,8 +25,8 @@ export class SelectComponent implements OnInit {
     
   }
 
-  selectionChangeEvent(id: string){
-    this.valueSelectedEvent.emit(this.valueSelected);
+  selectionChangeEvent(selected){
+    this.valueSelectedEvent.emit(selected.value);
   }
 
 }

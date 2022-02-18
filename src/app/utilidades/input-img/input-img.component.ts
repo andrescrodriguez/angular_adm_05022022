@@ -48,13 +48,6 @@ export class InputImgComponent implements OnInit {
 
   upload(){
     this.fileServerImagenService.upload(this.file).subscribe(event => {
-      // if (event.type === HttpEventType.UploadProgress){
-      //   // this.progress = Math.round(100 * event.loaded / event.total);
-      // }
-      // else if (event.type === HttpEventType.Response) {
-      //   // this.message = 'Upload success.';
-      // }
-      console.log(event);
       this.imagenSeleccionada.emit(event);
       this.file = null;
       this.btnSeleccionarCambiarTextoMethod();

@@ -14,5 +14,6 @@ export interface Articulo{
     fechaHoraAlta: Date;
     fechaHoraUltimaActualizacion: Date; 
     fechaHoraBaja: Date; 
+    idImagen: number;
     imagenesXArticulos: ImagenXArticulo[]; 
 }
