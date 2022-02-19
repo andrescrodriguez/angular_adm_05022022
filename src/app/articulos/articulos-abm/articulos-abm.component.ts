@@ -3,6 +3,7 @@ import { Component, KeyValueDiffers, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriasService } from 'src/app/categorias/categorias.service';
+import { Imagen } from 'src/app/models/imagen';
 import { KeyValue } from 'src/app/models/key-value';
 import { multipleSelectorModel } from 'src/app/selector-multiple/multiple-selector-model';
 import { parsearErroresAPI } from 'src/app/utilidades/errores-api/parsear-errores-api';
@@ -21,6 +22,7 @@ export class ArticulosAbmComponent implements OnInit {
   btn: string;
   categorias: KeyValue[] = []; 
   idCategoriaSelected: string;
+  imagen: Imagen;
 
   constructor(private formBuilder: FormBuilder, 
     private location: Location,
@@ -102,20 +104,25 @@ export class ArticulosAbmComponent implements OnInit {
       this.setearNombreDeRuta();
       this.articulosService.obtenerPorId(parseInt(form[1])).subscribe({
         next: (n) => {
-          
-          this.formGroup.patchValue({
-            Titulo:  n.titulo,
-            PreLectura: n.preLectura,
-            Contenido: n.contenido,
-            NombreDeRuta: n.nombreDeRuta,
-            FechaHoraPublicacion: n.fechaHoraPublicacion,
-            IdImagen: n.idImagen,
-            IdCategoria: n.idCategoria.toString()
-          })
 
-          // desplegable de categorías
-          this.idCategoriaSelected = n.idCategoria.toString();
+            this.formGroup.patchValue({
+              Titulo: n.titulo,
+              PreLectura: n.preLectura,
+              Contenido: n.contenido,
+              NombreDeRuta: n.nombreDeRuta,
+              FechaHoraPublicacion: n.fechaHoraPublicacion,
+              IdImagen: n.idImagen,
+              IdCategoria: n.idCategoria.toString()
+            })
 
+            if (n.imagenesXArticulos[0] !== undefined){
+              if(n.imagenesXArticulos[0].imagen !== undefined){
+                this.imagen = n.imagenesXArticulos[0].imagen;
+              }
+            }
+
+            // desplegable de categorías
+            this.idCategoriaSelected = n.idCategoria.toString();
           },
         error: (e) => { 
           this.errores = parsearErroresAPI(e);
@@ -196,7 +203,6 @@ export class ArticulosAbmComponent implements OnInit {
   }
 
   public editar(id: number){
-
     this.articulosService.editar(id, this.formGroup.value).subscribe({
       next: (n) => { 
         Swal.fire(

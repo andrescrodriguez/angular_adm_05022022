@@ -10,12 +10,15 @@
 
     <ng-container *ngIf="file != null">
         <button type="button" mat-raised-button color="warn" (click)="upload()">
-            Subir
+            Confirmar
         </button>
     </ng-container>
 
 </div>
 
+<div *ngIf="imagen !== undefined && imagenBase64 === undefined" fxLayout="row" fxLayoutAlign="center center">
+    <img [src]="imagen.ruta" class="width-50" />
+</div>
 
 <div *ngIf="imagenBase64" fxLayout="row" fxLayoutAlign="center center">
     <img [src]="imagenBase64" class="width-50" />

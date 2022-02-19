@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { toBase64 } from 'src/app/funciones';
 import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
 import { Imagen } from 'src/app/models/imagen';
@@ -11,13 +11,27 @@ import { Imagen } from 'src/app/models/imagen';
 })
 export class InputImgComponent implements OnInit {
 
+  @Input()
+  imagen: Imagen;
+
   @Output()
   imagenSeleccionada: EventEmitter<Imagen> = new EventEmitter<Imagen>();
+
+  imagenURLDefault: string;
 
   constructor(private fileServerImagenService: FileServerImagenService) { }
 
   ngOnInit(): void {
     this.btnSeleccionarCambiarTextoMethod();
+    console.log("este aca");
+
+    
+  }
+
+  setImagenDefault(){
+    
+
+    
   }
 
   btnSeleccionarCambiarTextoMethod(){
@@ -40,6 +54,7 @@ export class InputImgComponent implements OnInit {
       toBase64(this.file)
       .then((value: string) => {
         this.imagenBase64 = value;
+        this.imagenURLDefault = "";
         this.btnSeleccionarCambiarTextoMethod();
       })
       .catch((error) => console.log(error));

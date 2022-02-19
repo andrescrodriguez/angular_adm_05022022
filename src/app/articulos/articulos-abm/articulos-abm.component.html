@@ -65,7 +65,10 @@
       </quill-editor>
 
         <div style="margin: 10px 0px;">
-          <app-input-img (imagenSeleccionada)="imagenSeleccionada($event)"></app-input-img>
+          <app-input-img 
+            [imagen] = "imagen"
+            (imagenSeleccionada)="imagenSeleccionada($event)"
+            ></app-input-img>
         </div>
 
         <!-- <app-selector-multiple 
