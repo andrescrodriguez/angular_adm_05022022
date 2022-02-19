@@ -1,3 +1,12 @@
-<div style="margin: 10px 0px;">
-    <app-input-img (imagenSeleccionada)="imagenSeleccionada($event)"></app-input-img>
-</div>
+<mat-card style="margin-top:1em; margin-bottom:1em; min-height: 70vh;">
+    <mat-card-content style="margin:0;">
+        <mat-tab-group>
+            <mat-tab label="Subir imagen">  
+                <div>
+                    <app-input-img (imagenSeleccionada)="imagenSeleccionada($event)"></app-input-img>
+                </div>
+            </mat-tab>
+            <mat-tab label="Galería"> Content 2 </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
