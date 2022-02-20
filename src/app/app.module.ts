@@ -30,6 +30,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { ListImgComponent } from './utilidades/list-img/list-img.component';
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     QuillModule,
     FlexLayoutModule,
     ClipboardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

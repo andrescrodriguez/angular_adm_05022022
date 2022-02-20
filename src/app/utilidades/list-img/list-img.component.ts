@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
 import { Imagen } from 'src/app/models/imagen';
@@ -16,7 +17,8 @@ export class ListImgComponent implements OnInit {
   imagenes: string[];
 
   constructor(private fileServerImagenService: FileServerImagenService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.listar();
@@ -42,7 +44,6 @@ export class ListImgComponent implements OnInit {
       duration: 3000
     });
   }
-
 }
 
 
