@@ -15,28 +15,62 @@ export class ListImgComponent implements OnInit {
 
   imagenesList: Imagen[];
   imagenes: string[];
+  index: number = 1;
+  cantidadTotalDeRegistros: number;
+  anteriorDisabled: boolean;
+  siguienteDisabled: boolean;
 
   constructor(private fileServerImagenService: FileServerImagenService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.listar();
+    this.init();
   }
 
-  listar(){
-    this.fileServerImagenService.obtenerTodos(1,10).subscribe((result : HttpResponse<Imagen[]>) => {
-      console.log(result.body);
+  listar(value){
+    
+    if(value === 'ANTERIOR'){
+      if(this.index > 1){
+        this.index--;
+      }
+      else {
+        
+      }
+    }
 
-      // result.body.forEach(element => {
-      //   this.imagenes.push(element.ruta);
-      // });
-      
-      
-      console.log(result.headers.get('cantidadTotalDeRegistros'));
+    if(value === 'SIGUIENTE'){
+      this.index++;
+    }
+    
+    console.log(this.index);
 
+    this.fileServerImagenService.obtenerTodos(this.index,10).subscribe((result : HttpResponse<Imagen[]>) => {
+      // console.log(result.body);
+      // console.log(result.headers.get('cantidadTotalDeRegistros'));
       this.imagenesList = result.body;
-     });
+
+      this.cantidadTotalDeRegistros = parseInt(result.headers.get('cantidadTotalDeRegistros'));
+    
+      if((this.index * 10) > this.cantidadTotalDeRegistros){
+        this.siguienteDisabled = true;
+      }
+      else{
+        this.siguienteDisabled = false;
+      }
+
+      if(this.index === 1){
+        this.anteriorDisabled = true;
+      }
+      else{
+        this.anteriorDisabled = false;
+      }
+    });
+  }
+
+  init(){
+    this.anteriorDisabled = true;
+    this.siguienteDisabled = true;
   }
 
   openSnackBar(value){

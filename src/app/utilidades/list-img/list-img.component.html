@@ -54,9 +54,19 @@
             fxLayoutAlign.md="flex-end center" 
             fxLayoutAlign.lg="flex-end center" 
             fxLayoutAlign.xl="flex-end center">
-            <button type="button" id="btnSeleccionarCambiar" mat-flat-button (click)="listar()">
+            
+            <button type="button" id="btnSeleccionarCambiar" mat-flat-button (click)="listar('')">
                 Listar
             </button>
+
+            <div>
+                <button type="button" id="btnSeleccionarCambiar" mat-flat-button (click)="listar('ANTERIOR')" [disabled]="anteriorDisabled">
+                    <<
+                </button>
+                <button type="button" id="btnSeleccionarCambiar" mat-flat-button (click)="listar('SIGUIENTE')" [disabled]="siguienteDisabled">
+                    >>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -100,4 +110,6 @@ style="background-color:#ccc; border-radius:5px;"> -->
           </mat-card>
     </div> 
 </div>
+
+
 
