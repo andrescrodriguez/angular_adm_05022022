@@ -27,6 +27,7 @@ import { SelectComponent } from './controles-genericos/select/select.component';
 import { QuillModule } from 'ngx-quill';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ListImgComponent } from './utilidades/list-img/list-img.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AutorizadoComponent,
     CrearCuentaComponent,
     SelectComponent,
-    GaleriaComponent
+    GaleriaComponent,
+    ListImgComponent
   ],
   imports: [
     BrowserModule,
