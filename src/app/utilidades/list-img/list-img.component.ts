@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
 import { Imagen } from 'src/app/models/imagen';
 
@@ -14,7 +15,8 @@ export class ListImgComponent implements OnInit {
   imagenesList: Imagen[];
   imagenes: string[];
 
-  constructor(private fileServerImagenService: FileServerImagenService) { }
+  constructor(private fileServerImagenService: FileServerImagenService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.listar();
@@ -35,4 +37,12 @@ export class ListImgComponent implements OnInit {
      });
   }
 
+  openSnackBar(value){
+    this.snackBar.open(value, 'Cerrar', {
+      duration: 3000
+    });
+  }
+
 }
+
+

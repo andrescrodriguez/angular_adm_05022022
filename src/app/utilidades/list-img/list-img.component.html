@@ -1,5 +1,7 @@
 <form>
-<div style="margin-top:1em; margin-bottom: 1em;">
+
+        
+    <div style="margin-top:1em; margin-bottom: 1em;">
         <div 
             fxLayout.xs="column"
             fxLayout.sm="column" 
@@ -56,9 +58,10 @@
                 Listar
             </button>
         </div>
-</div>
+    </div>
 
-
+  
+  
 </form>
 
 
@@ -92,8 +95,8 @@ style="background-color:#ccc; border-radius:5px;"> -->
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
                 <button mat-button><small>Ver</small></button>
-                <button mat-button><small>Url</small></button>
-                <button mat-button><small>Tag</small></button>
+                <button mat-button cdkCopyToClipboard="{{img.ruta}}" (click)="openSnackBar('URL Copiada')"><small>Url</small></button>
+                <button mat-button cdkCopyToClipboard="{{img.nombre}}" (click)="openSnackBar('TAG Copiado')"><small>Tag</small></button>
             </mat-card-actions>
           </mat-card>
     </div> 

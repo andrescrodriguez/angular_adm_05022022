@@ -28,6 +28,8 @@ import { QuillModule } from 'ngx-quill';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ListImgComponent } from './utilidades/list-img/list-img.component';
+import { ClipboardModule } from "@angular/cdk/clipboard";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { ListImgComponent } from './utilidades/list-img/list-img.component';
     HttpClientModule,
     SweetAlert2Module.forRoot(),
     QuillModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ClipboardModule,
+    MatSnackBarModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
