@@ -66,8 +66,10 @@
 
         <div style="margin: 10px 0px;">
           <app-input-img 
+            [btnCustomText]="btnCustomText"
             [imagen] = "imagen"
             (imagenSeleccionada)="imagenSeleccionada($event)"
+            (btnCustomEvent)="btnCustomMethod($event)"
             ></app-input-img>
         </div>
 

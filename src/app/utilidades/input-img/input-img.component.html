@@ -1,6 +1,14 @@
 
 <div div fxLayout="row" fxLayoutAlign="center center" style="margin-top:1em; margin-bottom: 1em;">
 
+    <ng-container *ngIf="btnCustomText">
+        <button type="button" mat-raised-button color="primary" (click)="btnCustomMethod()">
+            Galería
+        </button>
+    </ng-container>
+
+    <div class="separador-horizontal-10"></div>
+
     <button type="button" id="btnSeleccionarCambiar" mat-raised-button color="primary" (click)="fileInput.click()">
         {{btnSeleccionarCambiarText}}
     </button>

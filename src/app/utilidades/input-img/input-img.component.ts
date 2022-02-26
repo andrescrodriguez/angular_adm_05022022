@@ -11,11 +11,18 @@ import { Imagen } from 'src/app/models/imagen';
 })
 export class InputImgComponent implements OnInit {
 
+  
   @Input()
   imagen: Imagen;
 
   @Output()
   imagenSeleccionada: EventEmitter<Imagen> = new EventEmitter<Imagen>();
+
+  @Input()
+  btnCustomText: string;
+
+  @Output()
+  btnCustomEvent: EventEmitter<string> = new EventEmitter<string>();
 
   imagenURLDefault: string;
 
@@ -23,15 +30,10 @@ export class InputImgComponent implements OnInit {
 
   ngOnInit(): void {
     this.btnSeleccionarCambiarTextoMethod();
-    console.log("este aca");
-
-    
   }
 
-  setImagenDefault(){
-    
-
-    
+  btnCustomMethod(){
+    this.btnCustomEvent.emit('');
   }
 
   btnSeleccionarCambiarTextoMethod(){

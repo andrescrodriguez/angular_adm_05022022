@@ -33,6 +33,7 @@ export class ArticulosAbmComponent implements OnInit {
 
   formGroup: FormGroup;
   errores: string[];
+  btnCustomText: string = "Galería";
   // categorias: [];
   // contenidoMarkDown: string;
 
@@ -278,6 +279,11 @@ export class ArticulosAbmComponent implements OnInit {
   imagenSeleccionada(imagen){
     this.formGroup.get('IdImagen').setValue(imagen.id);
   }
+
+  btnCustomMethod(event){
+    console.log(event);
+  }
+
 
 
   // escribirParametroEnUrl(){
