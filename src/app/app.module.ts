@@ -31,6 +31,9 @@ import { ListImgComponent } from './utilidades/list-img/list-img.component';
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatButtonModule } from '@angular/material/button';
+import { DialogConfirmComponent } from './utilidades/dialog-confirm/dialog-confirm.component';
+import { DialogImgComponent } from './utilidades/dialog-img/dialog-img.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { MatDialogModule } from "@angular/material/dialog";
     CrearCuentaComponent,
     SelectComponent,
     GaleriaComponent,
-    ListImgComponent
+    ListImgComponent,
+    DialogConfirmComponent,
+    DialogImgComponent
   ],
   imports: [
     BrowserModule,
@@ -67,8 +72,10 @@ import { MatDialogModule } from "@angular/material/dialog";
     FlexLayoutModule,
     ClipboardModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
+  entryComponents: [DialogConfirmComponent],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: SeguridadInterceptorService,

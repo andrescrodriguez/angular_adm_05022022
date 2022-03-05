@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { toBase64 } from 'src/app/funciones';
 import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
 import { Imagen } from 'src/app/models/imagen';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogImgComponent } from 'src/app/utilidades/dialog-img/dialog-img.component';
 
 @Component({
   selector: 'app-input-img',
@@ -10,7 +11,6 @@ import { Imagen } from 'src/app/models/imagen';
   styleUrls: ['./input-img.component.css']
 })
 export class InputImgComponent implements OnInit {
-
   
   @Input()
   imagen: Imagen;
@@ -26,14 +26,23 @@ export class InputImgComponent implements OnInit {
 
   imagenURLDefault: string;
 
-  constructor(private fileServerImagenService: FileServerImagenService) { }
+  constructor(private fileServerImagenService: FileServerImagenService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.btnSeleccionarCambiarTextoMethod();
   }
 
   btnCustomMethod(){
-    this.btnCustomEvent.emit('');
+    
+    const dialogRef = this.dialog.open(DialogImgComponent, {
+      width: '100%',
+      data: 'Seleccione la imagen'
+    }); 
+    dialogRef.afterClosed().subscribe(ref => {
+      console.log(ref);
+    });
+    // this.btnCustomEvent.emit('');
   }
 
   btnSeleccionarCambiarTextoMethod(){

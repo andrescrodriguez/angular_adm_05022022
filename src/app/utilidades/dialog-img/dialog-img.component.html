@@ -1,0 +1,7 @@
+<div mat-dialog-content>{{message}}
+    <app-list-img></app-list-img>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onClickNo()">No</button>
+    <button mat-button [mat-dialog-close]="true">Si</button>
+</div>
