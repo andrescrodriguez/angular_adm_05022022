@@ -12,18 +12,18 @@ import { UsuariosAbmComponent } from './usuarios/usuarios-abm/usuarios-abm.compo
 import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
 
 const routes: Routes = [
-  { path:'articulos', component: ArticulosListComponent },
-  { path: 'articulo/:cryptoid', component: ArticulosAbmComponent },
-  { path: 'articulo', component: ArticulosAbmComponent },
+  { path:'articulos', component: ArticulosListComponent, canActivate: [EsAdminGuard] },
+  { path: 'articulo/:cryptoid', component: ArticulosAbmComponent, canActivate: [EsAdminGuard] },
+  { path: 'articulo', component: ArticulosAbmComponent, canActivate: [EsAdminGuard] },
   { path: 'categorias', component: CategoriasListComponent, canActivate: [EsAdminGuard] },
   { path: 'categoria/:cryptoid', component: CategoriasAbmComponent, canActivate: [EsAdminGuard] },
   { path: 'categoria', component: CategoriasAbmComponent, canActivate: [EsAdminGuard] },
-  { path: 'usuarios', component: UsuariosListComponent },
-  { path: 'usuario/:cryptoid', component: UsuariosAbmComponent },
-  { path: 'galeria', component: GaleriaComponent },
+  { path: 'usuarios', component: UsuariosListComponent, canActivate: [EsAdminGuard] },
+  { path: 'usuario/:cryptoid', component: UsuariosAbmComponent, canActivate: [EsAdminGuard] },
+  { path: 'galeria', component: GaleriaComponent, canActivate: [EsAdminGuard] },
   { path: 'inicio-de-sesion', component: InicioDeSesionComponent },
-  { path: 'crear-cuenta', component: CrearCuentaComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'crear-cuenta', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
+  { path: '**', redirectTo: '', canActivate: [EsAdminGuard] }
 ];
 
 @NgModule({
