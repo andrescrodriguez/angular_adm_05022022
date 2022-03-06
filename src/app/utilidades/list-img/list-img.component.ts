@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileServerImagenService } from 'src/app/galeria/file-server-imagen.service';
@@ -19,6 +19,9 @@ export class ListImgComponent implements OnInit {
   cantidadTotalDeRegistros: number;
   anteriorDisabled: boolean;
   siguienteDisabled: boolean;
+
+  @Output()
+  imagenEvent: EventEmitter<Imagen> = new EventEmitter<Imagen>();
 
   constructor(private fileServerImagenService: FileServerImagenService,
     private snackBar: MatSnackBar,
@@ -77,6 +80,13 @@ export class ListImgComponent implements OnInit {
     this.snackBar.open(value, 'Cerrar', {
       duration: 3000
     });
+  }
+
+  radioChange(value){
+    const imagen = this.imagenesList.find(x => x.id === value);
+    if(imagen !== undefined){
+      this.imagenEvent.emit(imagen);
+    }
   }
 }
 

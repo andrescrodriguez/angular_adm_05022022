@@ -16,6 +16,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -35,7 +37,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule,
+    MatTooltipModule
   ],
   imports: [
     CommonModule

@@ -1,7 +1,7 @@
 <div mat-dialog-content>{{message}}
-    <app-list-img></app-list-img>
+    <app-list-img (imagenEvent)="imagenEvent($event)"></app-list-img>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onClickNo()">No</button>
-    <button mat-button [mat-dialog-close]="true">Si</button>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-stroked-button (click)="onClickNo()">Cancelar</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="imagen">Confirmar</button>
 </div>

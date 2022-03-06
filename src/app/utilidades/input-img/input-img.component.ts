@@ -21,9 +21,6 @@ export class InputImgComponent implements OnInit {
   @Input()
   btnCustomText: string;
 
-  @Output()
-  btnCustomEvent: EventEmitter<string> = new EventEmitter<string>();
-
   imagenURLDefault: string;
 
   constructor(private fileServerImagenService: FileServerImagenService,
@@ -40,9 +37,17 @@ export class InputImgComponent implements OnInit {
       data: 'Seleccione la imagen'
     }); 
     dialogRef.afterClosed().subscribe(ref => {
-      console.log(ref);
+
+      this.imagen = ref as Imagen;
+      console.log(this.imagen.ruta);
+
+      // this.btnCustomEvent.emit('');
+      this.imagenBase64 = undefined;
+      this.imagenURLDefault = this.imagen.ruta;
+      this.file = null;
+      this.btnSeleccionarCambiarTextoMethod();
+      this.imagenSeleccionada.emit(ref);
     });
-    // this.btnCustomEvent.emit('');
   }
 
   btnSeleccionarCambiarTextoMethod(){
@@ -59,9 +64,9 @@ export class InputImgComponent implements OnInit {
   btnSeleccionarCambiarText: string;
 
   change(event){
+    
     if(event.target.files.length > 0){
       this.file = event.target.files[0];
-
       toBase64(this.file)
       .then((value: string) => {
         this.imagenBase64 = value;
