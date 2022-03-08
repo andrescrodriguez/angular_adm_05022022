@@ -9,7 +9,7 @@ import { RespuestaAutenticacionDTO } from '../models/respuesta-autenticacion-dto
 @Injectable({
   providedIn: 'root'
 })
-export class SeguridadService {
+export class SeguridadService implements ABM {
 
   apiURL = environment.apiURL + '/cuenta';
   private readonly llaveToken = 'token';
@@ -18,10 +18,6 @@ export class SeguridadService {
 
   constructor(private http: HttpClient) { }
   
-  ObtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number) {
-
-  }
-
   crearCuenta(credencialesUsuarioDTO: any) {
     return this.http.post(this.apiURL + "/crear", credencialesUsuarioDTO);
   }
@@ -72,5 +68,29 @@ export class SeguridadService {
 
   obtenerToken(){
     return localStorage.getItem(this.llaveToken);
+  }
+
+  obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number): any{
+
+  }
+  
+  obtenerPorId(id: number): any{
+    
+  }
+
+  guardar(credencialesUsuarioDTO: CredencialesUsuarioDTO) {
+    return this.http.post(this.apiURL, credencialesUsuarioDTO);
+  }
+
+  editar(id: number, objeto: any): any{
+    
+  }
+
+  bajaLogica(id: number): any{
+    
+  }
+
+  eliminar(id: number): any{
+    
   }
 }

@@ -34,6 +34,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from '@angular/material/button';
 import { DialogConfirmComponent } from './utilidades/dialog-confirm/dialog-confirm.component';
 import { DialogImgComponent } from './utilidades/dialog-img/dialog-img.component';
+import { CuentasAbmComponent } from './cuentas/cuentas-abm/cuentas-abm.component';
+import { CuentasListComponent } from './cuentas/cuentas-list/cuentas-list.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { DialogImgComponent } from './utilidades/dialog-img/dialog-img.component
     GaleriaComponent,
     ListImgComponent,
     DialogConfirmComponent,
-    DialogImgComponent
+    DialogImgComponent,
+    CuentasAbmComponent,
+    CuentasListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,34 @@
+<ng-container *ngIf="erroresAPI?.length > 0">
+    <ul>
+        <li *ngFor="let error of erroresAPI">{{error}}</li>
+    </ul>
+</ng-container>
+
+<form
+[formGroup]="formGroup"
+(submit)="guardar()">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="Email">
+        <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="Password">
+        <mat-error>{{obtenerMensajeErrorPassword()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Repetir Password</mat-label>
+        <input matInput formControlName="RepetirPassword">
+        <mat-error>{{obtenerMensajeErrorRepetirPassword()}}</mat-error>
+    </mat-form-field>
+
+    <div>
+        <button mat-stroked-button routerLink="/cuentas">Cancelar</button>
+        <button mat-flat-button color="primary">Crear</button>
+    </div>
+
+</form>

@@ -6,6 +6,8 @@ import { CrearCuentaComponent } from './autenticacion/crear-cuenta/crear-cuenta.
 import { InicioDeSesionComponent } from './autenticacion/inicio-de-sesion/inicio-de-sesion.component';
 import { CategoriasAbmComponent } from './categorias/categorias-abm/categorias-abm.component';
 import { CategoriasListComponent } from './categorias/categorias-list/categorias-list.component';
+import { CuentasAbmComponent } from './cuentas/cuentas-abm/cuentas-abm.component';
+import { CuentasListComponent } from './cuentas/cuentas-list/cuentas-list.component';
 import { EsAdminGuard } from './es-admin.guard';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { UsuariosAbmComponent } from './usuarios/usuarios-abm/usuarios-abm.component';
@@ -22,8 +24,9 @@ const routes: Routes = [
   { path: 'usuario/:cryptoid', component: UsuariosAbmComponent, canActivate: [EsAdminGuard] },
   { path: 'galeria', component: GaleriaComponent, canActivate: [EsAdminGuard] },
   { path: 'inicio-de-sesion', component: InicioDeSesionComponent },
-  { path: 'cuenta', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
-  { path: 'cuenta/:cryptoid', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
+  { path: 'cuentas', component: CuentasListComponent, canActivate: [EsAdminGuard] },
+  { path: 'cuenta', component: CuentasAbmComponent, canActivate: [EsAdminGuard] },
+  { path: 'cuenta/:cryptoid', component: CuentasAbmComponent, canActivate: [EsAdminGuard] },
   { path: '**', redirectTo: '', canActivate: [EsAdminGuard] }
 ];
 
