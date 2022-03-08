@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'usuario/:cryptoid', component: UsuariosAbmComponent, canActivate: [EsAdminGuard] },
   { path: 'galeria', component: GaleriaComponent, canActivate: [EsAdminGuard] },
   { path: 'inicio-de-sesion', component: InicioDeSesionComponent },
-  { path: 'crear-cuenta', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
+  { path: 'cuenta', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
+  { path: 'cuenta/:cryptoid', component: CrearCuentaComponent, canActivate: [EsAdminGuard] },
   { path: '**', redirectTo: '', canActivate: [EsAdminGuard] }
 ];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SeguridadService } from '../seguridad/seguridad.service';
 
@@ -7,13 +7,14 @@ import { SeguridadService } from '../seguridad/seguridad.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements DoCheck {
 
   email: string;
 
-  constructor(private seguridadService: SeguridadService, private router: Router) { }
+  constructor(private seguridadService: SeguridadService, 
+    private router: Router) { }
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
     this.email = this.seguridadService.obtenerCampoJWT('email');
   }
 

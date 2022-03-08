@@ -1,28 +1,47 @@
-<ng-container *ngIf="erroresAPI?.length > 0">
-    <ul>
-        <li *ngFor="let error of erroresAPI">{{error}}</li>
-    </ul>
-</ng-container>
 
-<form
-[formGroup]="formGroup"
-(submit)="iniciarSesion()">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="Email">
-        <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="Password">
-        <mat-error>{{obtenerMensajeErrorPassword()}}</mat-error>
-    </mat-form-field>
 
-    <div>
-        <button mat-stroked-button routerLink="/inicio-de-sesion">Cancelar</button>
-        <button mat-flat-button color="primary">Crear</button>
+
+<div fxLayout="column" fxLayoutAlign="center center" style="height: 70vh;">
+   
+    <ng-container *ngIf="erroresAPI?.length > 0">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <ul style="list-style: none; margin:0; margin-top:2%; margin-bottom:1.3em; padding:0;" >
+                <li style="color:brown;" *ngFor="let error of erroresAPI">{{error}}</li>
+            </ul>
+        </div>
+    </ng-container>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+
+        <form
+            [formGroup]="formGroup"
+            (submit)="iniciarSesion()"
+            fxLayout="column"
+            fxLayoutAlign="stretch center"
+            >
+                <div style="margin-bottom:10%;">
+                    LOGO
+                </div>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="Email">
+                    <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="Password">
+                    <mat-error>{{obtenerMensajeErrorPassword()}}</mat-error>
+                </mat-form-field>
+        
+                <div>
+                    <button mat-flat-button color="primary">Iniciar Sesión</button>
+                </div>
+        
+            </form>
+
     </div>
-
-</form>
+</div>
