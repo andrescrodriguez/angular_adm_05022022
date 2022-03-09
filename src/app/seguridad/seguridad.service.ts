@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ABM } from '../interfaces/abm';
 import { CredencialesUsuarioDTO } from '../models/credenciales-usuario-dto';
+import { Cuenta } from '../models/cuenta';
 import { RespuestaAutenticacionDTO } from '../models/respuesta-autenticacion-dto';
 
 @Injectable({
@@ -78,8 +79,8 @@ export class SeguridadService implements ABM {
     
   }
 
-  guardar(credencialesUsuarioDTO: CredencialesUsuarioDTO) {
-    return this.http.post(this.apiURL, credencialesUsuarioDTO);
+  guardar(cuentaDTO: Cuenta) {
+    return this.http.post(this.apiURL, cuentaDTO);
   }
 
   editar(id: number, objeto: any): any{

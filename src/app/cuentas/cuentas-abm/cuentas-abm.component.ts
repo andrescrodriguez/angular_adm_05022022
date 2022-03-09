@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CredencialesUsuarioDTO } from 'src/app/models/credenciales-usuario-dto';
+import { Cuenta } from 'src/app/models/cuenta';
+import { KeyValue } from 'src/app/models/key-value';
 import { RespuestaAutenticacionDTO } from 'src/app/models/respuesta-autenticacion-dto';
 import { SeguridadService } from 'src/app/seguridad/seguridad.service';
 import { parsearErroresAPI } from 'src/app/utilidades/errores-api/parsear-errores-api';
@@ -13,6 +15,9 @@ import { parsearErroresAPI } from 'src/app/utilidades/errores-api/parsear-errore
   styleUrls: ['./cuentas-abm.component.css']
 })
 export class CuentasAbmComponent implements OnInit {
+
+  claims: KeyValue[] = [{key: 'admin', value: 'admin'}]; 
+  idClaimSelected: string;
 
   constructor(private formBuilder: FormBuilder, 
     private seguridadService: SeguridadService,
@@ -31,18 +36,28 @@ export class CuentasAbmComponent implements OnInit {
       }],
       RepetirPassword: ['', {
         validators: [Validators.required]
+      }],
+      Claim: ['', {
+        validators: [Validators.required]
       }]     
     });
   }
 
+  claimSelected(claim) {
+    this.formGroup.get("Claim").setValue(claim);
+  }
+
   guardar() {
     
-    const credencialesUsuarioDTO: CredencialesUsuarioDTO = {
-      Email: this.formGroup.get('Email').value,
-      Password: this.formGroup.get('Password').value
+    const cuentaDTO: Cuenta = {
+      id: 0,
+      email: this.formGroup.get('Email').value,
+      userName: this.formGroup.get('Email').value,
+      password: this.formGroup.get('Password').value,
+      claim: this.formGroup.get('Claim').value
     };
 
-    this.seguridadService.guardar(credencialesUsuarioDTO).subscribe({
+    this.seguridadService.guardar(cuentaDTO).subscribe({
       next: (n) => { 
         console.log(n)
         this.router.navigate(['/']);
@@ -77,5 +92,7 @@ export class CuentasAbmComponent implements OnInit {
     }
     return '';
   }
+
+  
 
 }

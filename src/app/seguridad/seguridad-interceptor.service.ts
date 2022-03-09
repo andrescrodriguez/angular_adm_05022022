@@ -24,7 +24,7 @@ export class SeguridadInterceptorService implements HttpInterceptor {
     var result = next.handle(req);
 
     console.log("req:");
-console.log(req);
+    console.log(req);
 
     return result;
 

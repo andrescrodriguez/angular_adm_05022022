@@ -4,31 +4,77 @@
     </ul>
 </ng-container>
 
-<form
-[formGroup]="formGroup"
-(submit)="guardar()">
+<mat-card style="margin-top:1em; margin-bottom:1em;">
+    <mat-card-content style="margin:0;">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="Email">
-        <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
-    </mat-form-field>
+        <form
+        [formGroup]="formGroup"
+        (submit)="guardar()"
+        fxLayout="column">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="Password">
-        <mat-error>{{obtenerMensajeErrorPassword()}}</mat-error>
-    </mat-form-field>
+        <div
+                fxLayout.xs="column" 
+                fxLayout.sm="column" 
+                fxLayout.md="row" 
+                fxLayout.lg="row"
+                fxLayout.xl="row" 
+                fxLayoutAlign.sm="center stretch" 
+                fxLayoutAlign.md="space-between center"
+                fxLayoutWrap>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Repetir Password</mat-label>
-        <input matInput formControlName="RepetirPassword">
-        <mat-error>{{obtenerMensajeErrorRepetirPassword()}}</mat-error>
-    </mat-form-field>
+                <mat-form-field appearance="fill"
+                fxFlex.xs="49%"
+                fxFlex.sm="49%"
+                fxFlex.md="49%">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="Email">
+                    <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
+                </mat-form-field>
 
-    <div>
-        <button mat-stroked-button routerLink="/cuentas">Cancelar</button>
-        <button mat-flat-button color="primary">Crear</button>
-    </div>
+                <app-select 
+                [nombre]="'Claim'" 
+                [objetos]="claims"
+                fxFlex.xs="49%"
+                fxFlex.sm="49%"
+                fxFlex.md="49%"
+                [valueSelected]="idClaimSelected"
+                (valueSelectedEvent)="claimSelected($event)"
+                ></app-select>
+            </div>
+            
+            <div
+                fxLayout.xs="column" 
+                fxLayout.sm="column" 
+                fxLayout.md="row" 
+                fxLayout.lg="row"
+                fxLayout.xl="row" 
+                fxLayoutAlign.sm="center stretch" 
+                fxLayoutAlign.md="space-between center"
+                fxLayoutWrap>
 
-</form>
+                <mat-form-field appearance="fill"
+                    fxFlex.xs="49%"
+                    fxFlex.sm="49%"
+                    fxFlex.md="49%">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="Password">
+                    <mat-error>{{obtenerMensajeErrorPassword()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"
+                    fxFlex.xs="49%"
+                    fxFlex.sm="49%"
+                    fxFlex.md="49%">
+                    <mat-label>Repetir Password</mat-label>
+                    <input matInput formControlName="RepetirPassword">
+                    <mat-error>{{obtenerMensajeErrorRepetirPassword()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-stroked-button routerLink="/cuentas">Cancelar</button>
+                <button mat-flat-button color="primary">Crear</button>
+            </div>
+
+        </form>
+  </mat-card-content>
+</mat-card>

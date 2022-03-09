@@ -43,6 +43,8 @@ export class InicioDeSesionComponent implements OnInit {
 
     this.seguridadService.iniciarSesion(credencialesUsuarioDTO).subscribe({
       next: (n) => { 
+        console.log("InicioDeSesionComponent-iniciarSesion")
+        console.log(n)
         const respuestaAutenticacionDTO: RespuestaAutenticacionDTO = {
           Token: n['token'],
           Expiracion: n['expiracion'].toString()
