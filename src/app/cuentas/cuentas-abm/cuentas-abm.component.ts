@@ -8,7 +8,6 @@ import { RespuestaAutenticacionDTO } from 'src/app/models/respuesta-autenticacio
 import { SeguridadService } from 'src/app/seguridad/seguridad.service';
 import { parsearErroresAPI } from 'src/app/utilidades/errores-api/parsear-errores-api';
 
-
 @Component({
   selector: 'app-cuentas-abm',
   templateUrl: './cuentas-abm.component.html',
