@@ -3,12 +3,12 @@
         
         <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
             <span>LOGO</span>
-            <span>
-                <button mat-icon-button routerLink="/">
+            <span fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-flat-button routerLink="/" style="margin-right:5px;">
                     Inicio
                 </button>
 
-                <button mat-icon-button [matMenuTriggerFor]="blog" aria-label="">
+                <button mat-flat-button [matMenuTriggerFor]="blog" aria-label="" style="margin-right:5px;">
                     Blog
                 </button>
                 <mat-menu #blog="matMenu">
@@ -22,6 +22,10 @@
                         Galería
                     </button>
                 </mat-menu>
+
+                <button mat-flat-button routerLink="/cuentas" style="margin-right:5px;">
+                    Cuentas
+                </button>
                 
                 <button mat-icon-button [matMenuTriggerFor]="cuenta" aria-label="">
                     <span class="material-icons">
