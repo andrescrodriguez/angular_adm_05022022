@@ -15,5 +15,8 @@ export interface Articulo{
     fechaHoraUltimaActualizacion: Date; 
     fechaHoraBaja: Date; 
     idImagen: number;
+    subtitulo: string;
+    metaDescription: string;
+    metaTags: string;
     imagenesXArticulos: ImagenXArticulo[]; 
 }

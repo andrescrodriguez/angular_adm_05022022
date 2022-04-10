@@ -34,22 +34,6 @@ export class ArticulosAbmComponent implements OnInit {
   formGroup: FormGroup;
   errores: string[];
   btnCustomText: string = "Galería";
-  // categorias: [];
-  // contenidoMarkDown: string;
-
-  // categoriasNoSeleccionadas: multipleSelectorModel[] = 
-  // [
-  //   {llave: 1, valor: 'Peliculas'},
-  //   {llave: 2, valor: 'Series'},
-  //   {llave: 3, valor: 'Teatro'},
-  //   {llave: 4, valor: 'Cine'},
-  //   {llave: 5, valor: 'Parque'},
-  //   {llave: 6, valor: 'Caminatas'}
-  // ];
-  // categoriasSeleccionadas: multipleSelectorModel[] = 
-  // [
-  //   {llave: 7, valor: 'Peliculas Online'}
-  // ];
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -62,7 +46,10 @@ export class ArticulosAbmComponent implements OnInit {
       NombreDeRuta: ['', Validators.required],
       FechaHoraPublicacion: ['', Validators.required],
       IdImagen: 0,
-      IdCategoria: ['', Validators.required]
+      IdCategoria: ['', Validators.required],
+      Subtitulo: '',
+      MetaDescription: '',
+      MetaTags: ''
     });
 
     this.setCategorias();
@@ -113,7 +100,10 @@ export class ArticulosAbmComponent implements OnInit {
               NombreDeRuta: n.nombreDeRuta,
               FechaHoraPublicacion: n.fechaHoraPublicacion,
               IdImagen: n.idImagen,
-              IdCategoria: n.idCategoria.toString()
+              IdCategoria: n.idCategoria.toString(),
+              Subtitulo: n.subtitulo,
+              MetaDescription: n.metaDescription,
+              MetaTags: n.metaTags
             })
 
             if (n.imagenesXArticulos[0] !== undefined){
@@ -242,6 +232,14 @@ export class ArticulosAbmComponent implements OnInit {
     return '';
   }
 
+  obtenerErrorCampoSubtitulo(): string{
+    var campo = this.formGroup.get('Subtitulo');
+    if(campo.hasError('primeraLetraMayuscula')){
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    return '';
+  }
+
   obtenerErrorCampoNombreDeRuta(): string{
     var campo = this.formGroup.get('NombreDeRuta');
     if(campo.hasError('required')){
@@ -272,6 +270,22 @@ export class ArticulosAbmComponent implements OnInit {
     }
     else if(campo.hasError('primeraLetraMayuscula')){
       return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    return '';
+  }
+
+  obtenerErrorCampoMetaDescription(): string{
+    var campo = this.formGroup.get('MetaDescription');
+    if(campo.hasError('required')){
+      return 'La meta descripción es requerida';
+    }
+    return '';
+  }
+
+  obtenerErrorCampoMetaTags(): string{
+    var campo = this.formGroup.get('MetaTags');
+    if(campo.hasError('required')){
+      return 'Los meta tags son requeridos';
     }
     return '';
   }

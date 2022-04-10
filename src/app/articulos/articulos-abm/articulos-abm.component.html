@@ -16,6 +16,12 @@
           <mat-error>{{obtenerErrorCampoTitulo()}}</mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="fill">
+        <mat-label>Subtítulo</mat-label>
+        <input matInput formControlName="Subtitulo"> <!-- [(ngModel)]="contenidoMarkDown"-->
+        <mat-error>{{obtenerErrorCampoSubtitulo()}}</mat-error>
+      </mat-form-field>
+
       <div
         fxLayout.xs="column" 
         fxLayout.sm="column" 
@@ -60,17 +66,27 @@
       <quill-editor formControlName="Contenido"></quill-editor>
 
       <h4 class="upper subtitle" style="margin-top:1em;">Prelectura</h4>
-      <quill-editor formControlName="PreLectura">
+      <quill-editor formControlName="PreLectura"></quill-editor>
+      <br/>
+      <mat-form-field appearance="fill">
+        <mat-label>Meta Descripción</mat-label>
+        <input matInput formControlName="MetaDescription">
+        <mat-error>{{obtenerErrorCampoMetaDescription()}}</mat-error>
+      </mat-form-field>
         
-      </quill-editor>
+      <mat-form-field appearance="fill">
+        <mat-label>Meta Tags</mat-label>
+        <input matInput formControlName="MetaTags">
+        <mat-error>{{obtenerErrorCampoMetaTags()}}</mat-error>
+      </mat-form-field>
 
-        <div style="margin: 10px 0px;">
-          <app-input-img 
-            [btnCustomText]="btnCustomText"
-            [imagen] = "imagen"
-            (imagenSeleccionada)="imagenSeleccionada($event)"
-            ></app-input-img>
-        </div>
+      <div style="margin: 10px 0px;">
+        <app-input-img 
+          [btnCustomText]="btnCustomText"
+          [imagen] = "imagen"
+          (imagenSeleccionada)="imagenSeleccionada($event)"
+          ></app-input-img>
+      </div>
 
         <!-- <app-selector-multiple 
           [noSeleccionados]="categoriasNoSeleccionadas"
