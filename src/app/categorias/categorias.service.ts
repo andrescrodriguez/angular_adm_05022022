@@ -4,35 +4,36 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ABM } from '../interfaces/abm';
 import { Categoria } from '../models/categoria';
+import { Response } from '../models/response';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriasService implements ABM {
+export class CategoriasService {
 
   apiURL = environment.apiURL + '/categoria';
 
   constructor(private http: HttpClient) { }
   
-  obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number): Observable<any> {
+  obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number) {
     var params = new HttpParams();
     params = params.append('Pagina', pagina.toString());
     params = params.append('RegistrosPorPagina', cantidadDeRegistrosAMostrar.toString());
-    return this.http.get<Categoria[]>(this.apiURL, {observe: 'response', params}); 
+    return this.http.post<Response>(this.apiURL + "/getAllWithPagination", {observe: 'response', params}); 
     // el observe: 'response' es para leer la cabecera http
     // tiene que retornar un Observable<any> porque con observe ya no se devuelve solo Categoria[]
   }
 
   obtenerPorId(id: number) {
-    return this.http.get<Categoria>(this.apiURL + '/' + id);
+    return this.http.get<Categoria>(this.apiURL + '/getById?id=' + id);
   }
 
   guardar(categoria: any) {
-    return this.http.post(this.apiURL, categoria);
+    return this.http.post(this.apiURL + '/new', categoria);
   }
 
   editar(id: number, categoria: any) {
-    return this.http.put<Categoria>(this.apiURL + '/' + id, categoria);
+    return this.http.put<Categoria>(this.apiURL + '/edit?id=' + id, categoria);
   }
 
   bajaLogica(id: number) {
@@ -40,7 +41,7 @@ export class CategoriasService implements ABM {
   }
 
   eliminar(id: number) {
-    return this.http.delete(this.apiURL + "/" + id);
+    return this.http.delete(this.apiURL + "/delete?id=" + id);
   }
 
   obtenerTodosPorUsuario() {
@@ -49,10 +50,10 @@ export class CategoriasService implements ABM {
 
   private construirFormData(categoria: Categoria) : FormData {
     const formData = new FormData();
-    formData.append('Nombre', categoria.nombre);
-    formData.append('NombreDeRuta', categoria.nombreDeRuta);
-    if(categoria.imagen){
-      formData.append('Imagen', categoria.imagen);
+    formData.append('Nombre', categoria.Nombre);
+    formData.append('NombreDeRuta', categoria.NombreDeRuta);
+    if(categoria.Imagen){
+      formData.append('Imagen', categoria.Imagen);
     }
     return formData;
   }

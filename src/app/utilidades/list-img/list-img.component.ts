@@ -46,28 +46,28 @@ export class ListImgComponent implements OnInit {
       this.index++;
     }
     
-    console.log(this.index);
-
-    this.fileServerImagenService.obtenerTodos(this.index,10).subscribe((result : HttpResponse<Imagen[]>) => {
-      // console.log(result.body);
-      // console.log(result.headers.get('cantidadTotalDeRegistros'));
-      this.imagenesList = result.body;
-
-      this.cantidadTotalDeRegistros = parseInt(result.headers.get('cantidadTotalDeRegistros'));
+    this.fileServerImagenService.obtenerTodos(this.index,10)
+    .subscribe({
+      next: n => { 
+        
+        this.cantidadTotalDeRegistros = (n["CantidadTotalDeRegistros"] as number);
+         this.imagenesList = (n["Imagenes"] as Imagen[]);
+         console.log(this.imagenesList);
+         if((this.index * 10) > this.cantidadTotalDeRegistros){
+            this.siguienteDisabled = true;
+          }
+          else{
+            this.siguienteDisabled = false;
+          }
     
-      if((this.index * 10) > this.cantidadTotalDeRegistros){
-        this.siguienteDisabled = true;
-      }
-      else{
-        this.siguienteDisabled = false;
-      }
-
-      if(this.index === 1){
-        this.anteriorDisabled = true;
-      }
-      else{
-        this.anteriorDisabled = false;
-      }
+          if(this.index === 1){
+            this.anteriorDisabled = true;
+          }
+          else{
+            this.anteriorDisabled = false;
+          } 
+      },
+      error: e => { console.error(e); }
     });
   }
 
@@ -83,7 +83,7 @@ export class ListImgComponent implements OnInit {
   }
 
   radioChange(value){
-    const imagen = this.imagenesList.find(x => x.id === value);
+    const imagen = this.imagenesList.find(x => x.Id === value);
     if(imagen !== undefined){
       this.imagenEvent.emit(imagen);
     }

@@ -28,9 +28,14 @@ export class ArticulosListComponent implements OnInit {
   }
 
   obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number) {
-    this.articulosService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar).subscribe((result : HttpResponse<Articulo[]>) => {
-     this.cantidadTotalDeRegistros = result.headers.get('cantidadTotalDeRegistros');
-     this.articulos = result.body;
+    this.articulosService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar)
+    .subscribe({
+      next: n => { 
+        this.cantidadTotalDeRegistros = (n["CantidadTotalDeRegistros"] as number);
+         this.articulos = (n["Articulos"] as Articulo[]);
+         this.table.renderRows(); 
+      },
+      error: e => { console.error(e); }
     });
   }
 
@@ -41,7 +46,7 @@ export class ArticulosListComponent implements OnInit {
   }
 
   eliminar(articulo){
-    this.articulosService.eliminar(articulo.id).subscribe({
+    this.articulosService.eliminar(articulo.Id).subscribe({
       next: n => { 
         this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
         this.table.renderRows(); 

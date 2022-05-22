@@ -19,14 +19,15 @@ export class EsAdminGuard implements CanActivate {
 
     // esta logueado
     if(this.seguridadService.estaLogueado() === true){
-      // es admin
-      if(this.seguridadService.obtenerRol() === 'admin'){
-        return true;
-      }
-      else{
-        this.router.navigate(['/']);
-        return false;
-      }
+      
+      // if(this.seguridadService.obtenerRol() === 'admin'){
+      //   return true;
+      // }
+      // else{
+      //   this.router.navigate(['/']);
+      //   return false;
+      // }
+      return true;
     }
     else{
       this.router.navigate(['/inicio-de-sesion']);

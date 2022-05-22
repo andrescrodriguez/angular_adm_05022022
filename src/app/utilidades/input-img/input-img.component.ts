@@ -39,11 +39,9 @@ export class InputImgComponent implements OnInit {
     dialogRef.afterClosed().subscribe(ref => {
 
       this.imagen = ref as Imagen;
-      console.log(this.imagen.ruta);
-
       // this.btnCustomEvent.emit('');
       this.imagenBase64 = undefined;
-      this.imagenURLDefault = this.imagen.ruta;
+      this.imagenURLDefault = this.imagen.Ruta;
       this.file = null;
       this.btnSeleccionarCambiarTextoMethod();
       this.imagenSeleccionada.emit(ref);
@@ -78,6 +76,7 @@ export class InputImgComponent implements OnInit {
   }
 
   upload(){
+    console.log("hasta aca si")
     this.fileServerImagenService.upload(this.file).subscribe(event => {
       this.imagenSeleccionada.emit(event);
       this.file = null;

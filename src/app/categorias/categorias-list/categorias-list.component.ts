@@ -28,9 +28,15 @@ export class CategoriasListComponent implements OnInit {
   }
 
   obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number) {
-    this.categoriasService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar).subscribe((result : HttpResponse<Categoria[]>) => {
-     this.cantidadTotalDeRegistros = result.headers.get('cantidadTotalDeRegistros');
-     this.categorias = result.body;
+    this.categoriasService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar)
+    .subscribe({
+      next: n => { 
+        console.log(n);
+        this.cantidadTotalDeRegistros = (n["CantidadTotalDeRegistros"] as number);
+        this.categorias = (n["Categorias"] as Categoria[]);
+        this.table.renderRows(); 
+      },
+      error: e => { console.error(e); }
     });
   }
 
@@ -41,11 +47,13 @@ export class CategoriasListComponent implements OnInit {
   }
 
   eliminar(categoria){
-    this.categoriasService.eliminar(categoria.id).subscribe(() => {
-      this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
-    },
-    error => console.error(error));
-
-    this.table.renderRows();
+    this.categoriasService.eliminar(categoria.Id)
+    .subscribe({
+      next: n => { 
+        this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
+        this.table.renderRows(); 
+      },
+      error: e => { console.error(e); }
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Component, KeyValueDiffers, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriasService } from 'src/app/categorias/categorias.service';
+import { Categoria } from 'src/app/models/categoria';
 import { Imagen } from 'src/app/models/imagen';
 import { KeyValue } from 'src/app/models/key-value';
 import { multipleSelectorModel } from 'src/app/selector-multiple/multiple-selector-model';
@@ -69,10 +70,10 @@ export class ArticulosAbmComponent implements OnInit {
   private setCategorias(){
     this.categoriasService.obtenerTodosPorUsuario().subscribe({
       next: n => {
-        n.forEach(element => {
+        (n["Categorias"] as Categoria[]).forEach(element => {
           const categoria: KeyValue = { 
-            key: element.id.toString(), 
-            value: element.nombre.trim() 
+            key: element.Id.toString(), 
+            value: element.Nombre.trim() 
           };
           this.categorias.push(categoria);
         });
@@ -90,30 +91,33 @@ export class ArticulosAbmComponent implements OnInit {
     }
     else if(form[0] === "EDITAR"){
       this.setearNombreDeRuta();
+
+
       this.articulosService.obtenerPorId(parseInt(form[1])).subscribe({
         next: (n) => {
-
+          console.log(n)
             this.formGroup.patchValue({
-              Titulo: n.titulo,
-              PreLectura: n.preLectura,
-              Contenido: n.contenido,
-              NombreDeRuta: n.nombreDeRuta,
-              FechaHoraPublicacion: n.fechaHoraPublicacion,
-              IdImagen: n.idImagen,
-              IdCategoria: n.idCategoria.toString(),
-              Subtitulo: n.subtitulo,
-              MetaDescription: n.metaDescription,
-              MetaTags: n.metaTags
+              Titulo: n.Titulo,
+              PreLectura: n.PreLectura,
+              Contenido: n.Contenido,
+              NombreDeRuta: n.NombreDeRuta,
+              FechaHoraPublicacion: n.FechaHoraPublicacion,
+              IdImagen: n.IdImagen,
+              IdCategoria: n.IdCategoria.toString(),
+              Subtitulo: n.Subtitulo,
+              MetaDescription: n.MetaDescription,
+              MetaTags: n.MetaTags
             })
+            
+            // desplegable de categorías
+            this.idCategoriaSelected = n.IdCategoria.toString();
 
-            if (n.imagenesXArticulos[0] !== undefined){
-              if(n.imagenesXArticulos[0].imagen !== undefined){
-                this.imagen = n.imagenesXArticulos[0].imagen;
-              }
+            
+            if (n.Imagen[0] !== undefined){
+              this.imagen = n.Imagen[0];
             }
 
-            // desplegable de categorías
-            this.idCategoriaSelected = n.idCategoria.toString();
+            
           },
         error: (e) => { 
           this.errores = parsearErroresAPI(e);
@@ -194,6 +198,9 @@ export class ArticulosAbmComponent implements OnInit {
   }
 
   public editar(id: number){
+
+    console.log(this.formGroup.value)
+
     this.articulosService.editar(id, this.formGroup.value).subscribe({
       next: (n) => { 
         Swal.fire(
@@ -291,7 +298,8 @@ export class ArticulosAbmComponent implements OnInit {
   }
 
   imagenSeleccionada(imagen){
-    this.formGroup.get('IdImagen').setValue(imagen.id);
+    console.log(imagen);
+    this.formGroup.get('IdImagen').setValue(imagen.Id);
   }
 
   btnCustomMethod(event){

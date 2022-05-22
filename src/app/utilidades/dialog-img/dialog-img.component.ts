@@ -22,6 +22,7 @@ export class DialogImgComponent implements OnInit {
   }
 
   imagenEvent(event){
+    console.log("sera esto");
     this.imagen = event;
   }
 }

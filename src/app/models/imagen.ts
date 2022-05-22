@@ -1,10 +1,10 @@
 import { ImagenXArticulo } from "./imagenxarticulo";
 
 export interface Imagen{
-    id: number;
-    nombre: string;
-    extension: string;
-    ruta: string;
-    fechaHoraAlta: Date;
-    imagenesXArticulos: ImagenXArticulo[];
+    Id: number;
+    Nombre: string;
+    Extension: string;
+    Ruta: string;
+    FechaHoraAlta: Date;
+    ImagenesXArticulos: ImagenXArticulo[];
 }

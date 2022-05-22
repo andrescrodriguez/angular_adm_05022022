@@ -104,8 +104,8 @@ export class CategoriasAbmComponent implements OnInit {
       this.categoriasService.obtenerPorId(parseInt(form[1])).subscribe({
         next: (n) => { 
           this.formGroup.patchValue({
-            Nombre: n.nombre,
-            NombreDeRuta: n.nombreDeRuta
+            Nombre: n.Nombre,
+            NombreDeRuta: n.NombreDeRuta
           })
           },
         error: (e) => { 

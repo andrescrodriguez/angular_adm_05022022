@@ -1,22 +1,22 @@
 import { Categoria } from "./categoria";
-import { ImagenXArticulo } from "./imagenxarticulo";
+import { Imagen } from "./imagen";
 
 export interface Articulo{
-    id: string; 
-    titulo: string;
-    preLectura: string; 
-    contenido: string;
-    nombreDeRuta: string;
-    idCategoria: number;  
-    categoria: Categoria;
-    categoriaNombre: string; 
-    fechaHoraPublicacion: Date;
-    fechaHoraAlta: Date;
-    fechaHoraUltimaActualizacion: Date; 
-    fechaHoraBaja: Date; 
-    idImagen: number;
-    subtitulo: string;
-    metaDescription: string;
-    metaTags: string;
-    imagenesXArticulos: ImagenXArticulo[]; 
+    Id: string; 
+    Titulo: string;
+    PreLectura: string; 
+    Contenido: string;
+    NombreDeRuta: string;
+    IdCategoria: number;  
+    Categoria: Categoria;
+    CategoriaNombre: string; 
+    FechaHoraPublicacion: Date;
+    FechaHoraAlta: Date;
+    FechaHoraUltimaActualizacion: Date; 
+    FechaHoraBaja: Date; 
+    IdImagen: number;
+    Subtitulo: string;
+    MetaDescription: string;
+    MetaTags: string;
+    Imagen: Imagen[]; 
 }

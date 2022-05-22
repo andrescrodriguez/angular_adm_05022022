@@ -91,17 +91,17 @@
     <div fxFlex="33%" fxFlex.="33%" style="padding:1%;" *ngFor="let img of imagenesList">
 
         <mat-card class="example-card">
-            <img src="{{img.ruta}}" style="width: 100%;" />
+            <img src="{{img.Ruta}}" style="width: 100%;" />
             <mat-card-content>
                 <div style="text-align: center;">
                     <small>diseño web, desarrollo web, diseño grafico, programacion</small>
                 </div>
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-                <button mat-button cdkCopyToClipboard="{{img.ruta}}" (click)="openSnackBar('URL Copiada')"><small>Url</small></button>
-                <button mat-button cdkCopyToClipboard="[[{{img.id}}*{{img.nombre}}]]" (click)="openSnackBar('TAG Copiado')"><small>Tag</small></button>
+                <button mat-button cdkCopyToClipboard="{{img.Ruta}}" (click)="openSnackBar('URL Copiada')"><small>Url</small></button>
+                <button mat-button cdkCopyToClipboard="[[{{img.Id}}*{{img.Nombre}}]]" (click)="openSnackBar('TAG Copiado')"><small>Tag</small></button>
                 <div style="margin-left:10px;">
-                    <mat-radio-button matTooltip="Seleccionar Imagen" value="{{img.id}}" (change)="radioChange(img.id)"></mat-radio-button>
+                    <mat-radio-button matTooltip="Seleccionar Imagen" value="{{img.Id}}" (change)="radioChange(img.Id)"></mat-radio-button>
                 </div>
             </mat-card-actions>
           </mat-card>

@@ -17,17 +17,17 @@ export class AutorizadoComponent implements OnInit {
   }
 
   estaAutorizado() : boolean {
-
     // si esta autenticado
     if (this.seguridadService.estaLogueado() === true) {
 
       // si esta autorizado
-      if(this.rol) {
-        return this.seguridadService.obtenerRol() === this.rol;
-      }
-      else {
-        return false;
-      }
+      // if(this.rol) {
+      //   return this.seguridadService.obtenerRol() === this.rol;
+      // }
+      // else {
+      //   return false;
+      // }
+      return true;
 
     }
     else {
