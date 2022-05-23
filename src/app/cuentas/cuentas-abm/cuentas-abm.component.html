@@ -9,7 +9,7 @@
 
         <form
         [formGroup]="formGroup"
-        (submit)="guardar()"
+        (submit)="accion()"
         fxLayout="column">
 
         <div
@@ -81,7 +81,7 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <button mat-stroked-button routerLink="/cuentas">Cancelar</button>
-                <button mat-flat-button color="primary">Crear</button>
+                <button mat-flat-button color="primary" [disabled]="formGroup.invalid">{{btn}}</button>
             </div>
 
         </form>

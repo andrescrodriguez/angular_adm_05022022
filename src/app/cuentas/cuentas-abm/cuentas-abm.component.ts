@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { SeguridadService } from 'src/app/seguridad/seguridad.service';
 import { parsearErroresAPI } from 'src/app/utilidades/errores-api/parsear-errores-api';
 import { CuentasService } from '../cuentas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cuentas-abm',
@@ -19,9 +20,12 @@ export class CuentasAbmComponent implements OnInit {
 
   claims: KeyValue[] = [{key: 'admin', value: 'admin'}]; 
   idClaimSelected: string;
+  NombreMsj: string;
+  errores: string[];
+  btn: string;
 
   constructor(private formBuilder: FormBuilder, 
-    private cuentaService: CuentasService,
+    private cuentasService: CuentasService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
@@ -46,29 +50,114 @@ export class CuentasAbmComponent implements OnInit {
         validators: [Validators.required]
       }]     
     });
+
+    this.cargarFormGroup();
+  }
+
+  private cargarFormGroup() {
+    
+    var form = this.mostrarFormulario();
+    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
+    if(form[0] === "GUARDAR"){
+      
+    }
+    else if(form[0] === "EDITAR"){
+      this.cuentasService.obtenerPorId(parseInt(form[1])).subscribe({
+        next: (n) => { 
+          this.formGroup.patchValue({
+            Email: n.Email,
+            UserName: n.UserName,
+            Password: '',
+            RepetirPassword: ''
+          })
+          },
+        error: (e) => { 
+          this.errores = parsearErroresAPI(e);
+          Swal.fire(
+            'Ha surgido un error!',
+            this.errores.join('<br>'),
+            'error'
+          )
+          }
+      });
+    }
+  }
+
+  mostrarFormulario(): string[]{
+    
+    const result: string[] = [];
+
+    this.activatedRoute.paramMap.subscribe( params => {
+      var _params = params['params'];
+      
+      if (Object.keys(_params).length === 0 
+          && 
+          _params.constructor === Object
+        )
+      { 
+        this.btn = "Guardar";
+        result.push("GUARDAR");
+      }
+      else { 
+        this.btn = "Editar";
+        result.push("EDITAR");
+        result.push(_params['cryptoid']);
+      }
+     });
+
+     return result;
   }
 
   claimSelected(claim) {
     this.formGroup.get("Claim").setValue(claim);
   }
 
-  guardar() {
-    
-    const usuarioDTO: Usuario = {
-      Id: 0,
-      Email: this.formGroup.get('Email').value,
-      UserName: this.formGroup.get('UserName').value,
-      Password: this.formGroup.get('Password').value,
-      Claim: this.formGroup.get('Claim').value
-    };
+  public accion(){
+    var form = this.mostrarFormulario();
+    if(form[0] === "GUARDAR"){ this.guardar(); }
+    else if(form[0] === "EDITAR"){ this.editar(parseInt(form[1])); }
+  }
 
-    this.cuentaService.guardar(usuarioDTO).subscribe({
+  guardar() {
+    this.cuentasService.guardar(this.formGroup.value).subscribe({
       next: (n) => { 
-        this.router.navigate(['/cuentas']);
+        Swal.fire(
+          'Guardada exitosamente!',
+          'Click para continuar',
+          'success'
+        ).then(() => {
+          this.router.navigate(['/cuentas']);
+        })
        },
       error: (e) => { 
-        console.log("errores:")
-        this.erroresAPI = parsearErroresAPI(e);
+        this.errores = parsearErroresAPI(e);
+        Swal.fire(
+          'Ha surgido un error!',
+          this.errores.join('<br>'),
+          'error'
+        )
+       }
+    });
+  }
+
+  public editar(id: number){
+    this.cuentasService.editar(id, this.formGroup.value).subscribe({
+      next: (n) => { 
+        Swal.fire(
+          'Actualizada exitosamente!',
+          'Click para continuar',
+          'success'
+        ).then(() => {
+          this.router.navigate(['/cuentas']);
+        })
+       },
+      error: (e) => { 
+        this.errores = parsearErroresAPI(e);
+        Swal.fire(
+          'Ha surgido un error!',
+          this.errores.join('<br>'),
+          'error'
+        )
        }
     });
   }
@@ -98,6 +187,7 @@ export class CuentasAbmComponent implements OnInit {
   }
 
   obtenerMensajeErrorRepetirPassword() : string {
+
     var campo = this.formGroup.get('RepetirPassword');
     if (campo.hasError('required')){
       return 'El campo Repetir Password es requerido';
