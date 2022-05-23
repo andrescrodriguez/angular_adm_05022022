@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { Cuenta } from 'src/app/models/cuenta';
+import { Usuario } from 'src/app/models/usuario';
+import { CuentasService } from '../cuentas.service';
 
 @Component({
   selector: 'app-cuentas-list',
@@ -11,9 +13,9 @@ import { Cuenta } from 'src/app/models/cuenta';
 })
 export class CuentasListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cuentasService: CuentasService) { }
 
-  cuentas: Cuenta[];
+  usuarios: Usuario[];
 
   columnasAMostrar = ['UserName', 'Email', 'Acciones'];
   @ViewChild(MatTable) table: MatTable<any>;
@@ -27,10 +29,14 @@ export class CuentasListComponent implements OnInit {
   }
 
   obtenerTodos(pagina: number, cantidadDeRegistrosAMostrar: number) {
-    // this.articulosService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar).subscribe((result : HttpResponse<Articulo[]>) => {
-    //  this.cantidadTotalDeRegistros = result.headers.get('cantidadTotalDeRegistros');
-    //  this.articulos = result.body;
-    // });
+    this.cuentasService.obtenerTodos(pagina, cantidadDeRegistrosAMostrar).subscribe({
+      next: n => { 
+        this.cantidadTotalDeRegistros = (n["CantidadTotalDeRegistros"] as number);
+         this.usuarios = (n["Usuarios"] as Usuario[]);
+         this.table.renderRows(); 
+      },
+      error: e => { console.error(e); }
+    });
   }
 
   actualizarPaginacion(event: PageEvent){
@@ -39,14 +45,14 @@ export class CuentasListComponent implements OnInit {
     this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
   }
 
-  eliminar(articulo){
-    // this.articulosService.eliminar(articulo.id).subscribe({
-    //   next: n => { 
-    //     this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
-    //     this.table.renderRows(); 
-    //   },
-    //   error: e => { console.error(e); }
-    // });
+  eliminar(usuario){
+    this.cuentasService.eliminar(usuario.Id).subscribe({
+      next: n => { 
+        this.obtenerTodos(this.paginaActual, this.cantidadDeRegistrosAMostrar);
+        this.table.renderRows(); 
+      },
+      error: e => { console.error(e); }
+    });
   }
 
 }

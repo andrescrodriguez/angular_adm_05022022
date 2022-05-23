@@ -26,6 +26,15 @@
                 fxFlex.xs="49%"
                 fxFlex.sm="49%"
                 fxFlex.md="49%">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="UserName">
+                    <mat-error>{{obtenerMensajeErrorUserName()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"
+                fxFlex.xs="49%"
+                fxFlex.sm="49%"
+                fxFlex.md="49%">
                     <mat-label>Email</mat-label>
                     <input matInput formControlName="Email">
                     <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
